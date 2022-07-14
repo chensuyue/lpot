@@ -1,79 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Tuning Strategies &mdash; Intel® Low Precision Optimization Tool  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Tuning Strategies &mdash; Intel® Neural Compressor  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Release" href="../releases_info.html" />
+    <link rel="next" title="Release" href="releases_info.html" />
     <link rel="prev" title="Adaptor" href="adaptor.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
-            <a href="../index.html" class="icon icon-home"> Intel® Low Precision Optimization Tool
-          
-
-          
+            <a href="../index.html" class="icon icon-home"> Intel® Neural Compressor
           </a>
-
-          
-            
-            
               <div class="version">
-                1.4
+                1.12
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -81,23 +37,12 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">Introduction to Intel® LPOT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Intel® Neural Compressor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples_readme.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api-introduction.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples_readme.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-documentation/apis.html">APIs</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="doclist.html">Developer Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="doclist.html#get-started">Get Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doclist.html#deep-dive">Deep Dive</a></li>
@@ -114,93 +59,51 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../releases_info.html">Release</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contribution Guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../legal_information.html">Legal Information</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../security_policy.html">Security Policy</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/intel/lpot">Intel® LPOT repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releases_info.html">Release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributions.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal_information.html">Legal Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security_policy.html">Security Policy</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/intel/neural-compressor">Intel® Neural Compressor repository</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Intel® Low Precision Optimization Tool</a>
-        
+          <a href="../index.html">Intel® Neural Compressor</a>
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="doclist.html">Developer Documentation</a> &raquo;</li>
-        
       <li>Tuning Strategies</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/docs/tuning_strategies.md.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <section id="tuning-strategies">
+             
+  <div class="section" id="tuning-strategies">
 <h1>Tuning Strategies<a class="headerlink" href="#tuning-strategies" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>Intel® Low Precision Optimization Tool aims to help users quickly deploy
+<p>Intel® Neural Compressor aims to help users quickly deploy
 the low-precision inference solution on popular Deep Learning frameworks
 such as TensorFlow, PyTorch, and MxNet. Using built-in strategies, it
 automatically optimizes low-precision recipes for deep learning models to
 achieve optimal product objectives, such as inference performance and memory
-usage, with expected accuracy criteria. Currently, it supports <code class="docutils literal notranslate"><span class="pre">Basic</span></code>, <code class="docutils literal notranslate"><span class="pre">Bayesian</span></code>, <code class="docutils literal notranslate"><span class="pre">Exhaustive</span></code>, <code class="docutils literal notranslate"><span class="pre">MSE</span></code>, <code class="docutils literal notranslate"><span class="pre">Random</span></code>, and <code class="docutils literal notranslate"><span class="pre">TPE</span></code> strategies. <code class="docutils literal notranslate"><span class="pre">Basic</span></code> is
+usage, with expected accuracy criteria. Currently, it supports <code class="docutils literal notranslate"><span class="pre">Basic</span></code>, <code class="docutils literal notranslate"><span class="pre">Bayesian</span></code>, <code class="docutils literal notranslate"><span class="pre">Exhaustive</span></code>, <code class="docutils literal notranslate"><span class="pre">MSE</span></code>, <code class="docutils literal notranslate"><span class="pre">Random</span></code>, <code class="docutils literal notranslate"><span class="pre">SigOpt</span></code> and <code class="docutils literal notranslate"><span class="pre">TPE</span></code> strategies. <code class="docutils literal notranslate"><span class="pre">Basic</span></code> is
 the default strategy.</p>
-</section>
-<section id="strategy-design">
+</div>
+<div class="section" id="strategy-design">
 <h2>Strategy Design<a class="headerlink" href="#strategy-design" title="Permalink to this headline">¶</a></h2>
 <p>Each strategy generates the next quantization configuration according to its
 logic and the last quantization result. The function of strategies is shown
@@ -208,7 +111,7 @@ below:</p>
 <p><img alt="Tuning Strategy" src="../_images/strategy.png" /></p>
 <p>Strategies begin with an adaptor layer (Framework Adaptor) where the user
 passes a framework-specific model to initialize an instance of the
-<code class="docutils literal notranslate"><span class="pre">lpot.Quantization()</span> <span class="pre">class</span></code>; strategies call the <code class="docutils literal notranslate"><span class="pre">self.adaptor.query_fw_capability(model)</span></code> to get the framework and
+<code class="docutils literal notranslate"><span class="pre">neural_compressor.Quantization()</span> <span class="pre">class</span></code>; strategies call the <code class="docutils literal notranslate"><span class="pre">self.adaptor.query_fw_capability(model)</span></code> to get the framework and
 model-specific quantization capabilities. From there, each strategy merges
 model-specific configurations in a <code class="docutils literal notranslate"><span class="pre">yaml</span></code> configuration file to filter some
 capability from the first step in order to generate the tuning space. Each
@@ -216,11 +119,11 @@ strategy then generates the quantization config according to its location
 and logic with tuning strategy configurations from the <code class="docutils literal notranslate"><span class="pre">yaml</span></code> configuration
 file. All strategies finish the tuning processing when the <code class="docutils literal notranslate"><span class="pre">timeout</span></code> or <code class="docutils literal notranslate"><span class="pre">max_trails</span></code> is reached. The default value of <code class="docutils literal notranslate"><span class="pre">timeout</span></code> is 0; if reached, the
 tuning phase stops when the <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> criteria is met.</p>
-</section>
-<section id="configurations">
+</div>
+<div class="section" id="configurations">
 <h2>Configurations<a class="headerlink" href="#configurations" title="Permalink to this headline">¶</a></h2>
-<p>Detailed configuration templates can be found <a class="reference external" href="https://github.com/intel/lpot/tree/4939eb6527920867c16ffa9f9342df6fdc81f93f/docs/../lpot/template">here</a>.</p>
-<section id="model-specific-configurations">
+<p>Detailed configuration templates can be found <a class="reference external" href="https://github.com/chensuyue/lpot/tree/452349b090ac4c7987ce25f19bf6ba44a1eb1862/docs/../neural_compressor/template">here</a>.</p>
+<div class="section" id="model-specific-configurations">
 <h3>Model-specific configurations<a class="headerlink" href="#model-specific-configurations" title="Permalink to this headline">¶</a></h3>
 <p>For model-specific configurations, users can set the quantization approach.
 For post-training static quantization, users can also set calibration and
@@ -233,7 +136,7 @@ quantization-related parameters for model-wise and op-wise:</p>
     <span class="nt">first_conv_or_matmul_quantization</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>          <span class="c1"># optional. default value is True.</span>
   <span class="nt">calibration</span><span class="p">:</span>
     <span class="nt">sampling_size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000, 2000</span>                        <span class="c1"># optional. default value is 100. used to set how many samples should be used in calibration.</span>
-    <span class="nt">dataloader</span><span class="p">:</span>                                      <span class="c1"># optional. if not specified, user need construct a q_dataloader in code for lpot.Quantization.</span>
+    <span class="nt">dataloader</span><span class="p">:</span>                                      <span class="c1"># optional. if not specified, user need construct a q_dataloader in code for neural_compressor.Quantization.</span>
       <span class="nt">dataset</span><span class="p">:</span>
         <span class="nt">TFRecordDataset</span><span class="p">:</span>
           <span class="nt">root</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/path/to/tf_record</span>
@@ -268,8 +171,8 @@ quantization-related parameters for model-wise and op-wise:</p>
        <span class="p p-Indicator">}</span>
 </pre></div>
 </div>
-</section>
-<section id="strategy-tuning-part-related-configurations">
+</div>
+<div class="section" id="strategy-tuning-part-related-configurations">
 <h3>Strategy tuning part-related configurations<a class="headerlink" href="#strategy-tuning-part-related-configurations" title="Permalink to this headline">¶</a></h3>
 <p>In strategy tuning part-related configurations, users can choose a specific
 tuning strategy and then set the accuracy criterion and optimization
@@ -290,10 +193,10 @@ by changing the <code class="docutils literal notranslate"><span class="pre">exi
   <span class="nt">tensorboard</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>                                  <span class="c1"># optional. dump tensor distribution in evaluation phase for debug purpose. default value is False.</span>
 </pre></div>
 </div>
-</section>
-<section id="basic">
+</div>
+<div class="section" id="basic">
 <h3>Basic<a class="headerlink" href="#basic" title="Permalink to this headline">¶</a></h3>
-<section id="design">
+<div class="section" id="design">
 <h4>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Basic</span></code> strategy is designed for most models to do quantization. It includes
 three steps. First, <code class="docutils literal notranslate"><span class="pre">Basic</span></code> strategy tries all model-wise tuning configs to
@@ -305,8 +208,8 @@ accuracy and then sorts accordingly. In the final step, Basic tries to
 incrementally fallback multiple OPs to high precision according to the
 sorted OP list that is generated in the second step until the accuracy
 goal is achieved.</p>
-</section>
-<section id="usage">
+</div>
+<div class="section" id="usage">
 <h4>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Basic</span></code> is the default strategy. It can be used by default if you don’t add
 the <code class="docutils literal notranslate"><span class="pre">strategy</span></code> field in your <code class="docutils literal notranslate"><span class="pre">yaml</span></code> configuration file. Classical settings in the configuration file are shown below:</p>
@@ -318,25 +221,25 @@ the <code class="docutils literal notranslate"><span class="pre">strategy</span>
   <span class="nt">random_seed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9527</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="bayesian">
+</div>
+</div>
+<div class="section" id="bayesian">
 <h3>Bayesian<a class="headerlink" href="#bayesian" title="Permalink to this headline">¶</a></h3>
-<section id="id1">
+<div class="section" id="id1">
 <h4>Design<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Bayesian</span></code> optimization is a sequential design strategy for the global
 optimization of black-box functions. This strategy comes from the <a class="reference external" href="https://github.com/fmfn/BayesianOptimization">Bayesian
 optimization</a> package and
 changed it to a discrete version that complied with the strategy standard of
-Intel® Low Precision Optimization Tool. It uses <a class="reference external" href="https://en.wikipedia.org/wiki/Neural_network_Gaussian_process">Gaussian processes</a> to define
+Intel® Neural Compressor. It uses <a class="reference external" href="https://en.wikipedia.org/wiki/Neural_network_Gaussian_process">Gaussian processes</a> to define
 the prior/posterior distribution over the black-box function with the tuning
 history, and then finds the tuning configuration that maximizes the expected
 improvement. For now, <code class="docutils literal notranslate"><span class="pre">Bayesian</span></code> just focus on op-wise quantize configs tuning
 without fallback phase. In order to obtain a quantized model with good accuracy
 and better performance in a short time, we don’t add datatype as a tuning
 parameter into <code class="docutils literal notranslate"><span class="pre">Bayesian</span></code>.</p>
-</section>
-<section id="id2">
+</div>
+<div class="section" id="id2">
 <h4>Usage<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <p>For the <code class="docutils literal notranslate"><span class="pre">Bayesian</span></code> strategy, set the <code class="docutils literal notranslate"><span class="pre">timeout</span></code> or <code class="docutils literal notranslate"><span class="pre">max_trials</span></code> to a non-zero
 value as shown in the below example. This is because the param space for <code class="docutils literal notranslate"><span class="pre">bayesian</span></code> can be very small so the accuracy goal might not be reached which
@@ -353,11 +256,11 @@ can make the tuning never end. Additionally, if the log level is set to <code cl
     <span class="nt">max_trials</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="mse">
+</div>
+</div>
+<div class="section" id="mse">
 <h3>MSE<a class="headerlink" href="#mse" title="Permalink to this headline">¶</a></h3>
-<section id="id3">
+<div class="section" id="id3">
 <h4>Design<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">MSE</span></code> and <code class="docutils literal notranslate"><span class="pre">Basic</span></code> strategies share similar ideas. The primary difference
 between the two strategies is the way sorted op lists are generated in step
@@ -366,8 +269,8 @@ models and the quantized model based on the best model-wise tuning
 configuration. It then calculates the MSE (Mean Squared Error) for each
 operator, sorts those operators according to the MSE value, and performs
 the op-wise fallback in this order.</p>
-</section>
-<section id="id4">
+</div>
+<div class="section" id="id4">
 <h4>Usage<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">MSE</span></code> is similar to <code class="docutils literal notranslate"><span class="pre">Basic</span></code> but the specific strategy name of <code class="docutils literal notranslate"><span class="pre">mse</span></code> must be
 included.</p>
@@ -381,11 +284,11 @@ included.</p>
   <span class="nt">random_seed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9527</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="tpe">
+</div>
+</div>
+<div class="section" id="tpe">
 <h3>TPE<a class="headerlink" href="#tpe" title="Permalink to this headline">¶</a></h3>
-<section id="id5">
+<div class="section" id="id5">
 <h4>Design<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">TPE</span></code> uses sequential model-based optimization methods (SMBOs). **Sequential
 ** refers to running trials one after another and selecting a better
@@ -424,8 +327,8 @@ requires evaluation of a generated model–which means accuracy measurements
 on a dataset and latency measurements using a benchmark–this process can
 take from 24 hours to few days to complete, depending on the model.</p>
 </div></blockquote>
-</section>
-<section id="id6">
+</div>
+<div class="section" id="id6">
 <h4>Usage<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">TPE</span></code> usage is similar to <code class="docutils literal notranslate"><span class="pre">Bayesian</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tuning</span><span class="p">:</span>
@@ -440,18 +343,18 @@ take from 24 hours to few days to complete, depending on the model.</p>
     <span class="nt">max_trials</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">100</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="exhaustive">
+</div>
+</div>
+<div class="section" id="exhaustive">
 <h3>Exhaustive<a class="headerlink" href="#exhaustive" title="Permalink to this headline">¶</a></h3>
-<section id="id7">
+<div class="section" id="id7">
 <h4>Design<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Exhaustive</span></code> strategy is used to sequentially traverse all possible tuning
 configurations in a tuning space. From the perspective of the impact on
 performance, we currently only traverse all possible quantize tuning
 configs. Same reason as <code class="docutils literal notranslate"><span class="pre">Bayesian</span></code>, fallback datatypes are not included for now.</p>
-</section>
-<section id="id8">
+</div>
+<div class="section" id="id8">
 <h4>Usage<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Exhaustive</span></code> usage is similar to <code class="docutils literal notranslate"><span class="pre">Basic</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tuning</span><span class="p">:</span>
@@ -464,17 +367,17 @@ configs. Same reason as <code class="docutils literal notranslate"><span class="
   <span class="nt">random_seed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9527</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="random">
+</div>
+</div>
+<div class="section" id="random">
 <h3>Random<a class="headerlink" href="#random" title="Permalink to this headline">¶</a></h3>
-<section id="id9">
+<div class="section" id="id9">
 <h4>Design<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Random</span></code> strategy is used to randomly choose tuning configurations from the
 tuning space. As with <code class="docutils literal notranslate"><span class="pre">Exhaustive</span></code> strategy, it also only considers quantize
 tuning configs to generate a better-performance quantized model.</p>
-</section>
-<section id="id10">
+</div>
+<div class="section" id="id10">
 <h4>Usage<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">Random</span></code> usage is similar to <code class="docutils literal notranslate"><span class="pre">Basic</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tuning</span><span class="p">:</span>
@@ -487,12 +390,37 @@ tuning configs to generate a better-performance quantized model.</p>
   <span class="nt">random_seed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9527</span>
 </pre></div>
 </div>
-</section>
-</section>
-</section>
-<section id="customize-a-new-tuning-strategy">
+</div>
+</div>
+<div class="section" id="sigopt">
+<h3>SigOpt<a class="headerlink" href="#sigopt" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h4>Design<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">SigOpt</span></code> strategy is to use <a class="reference external" href="https://app.sigopt.com/docs/overview/optimization">SigOpt Optimization Loop</a> method to accelerate and visualize the traversal of the tuning configurations from the tuning space. The metrics add accuracy as constraint and optimize for latency to improve the performance. <a class="reference external" href="https://app.sigopt.com/">SigOpt Projects</a> can show the result of each tuning experiment.</p>
+</div>
+<div class="section" id="id12">
+<h4>Usage<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<p>Compare to <code class="docutils literal notranslate"><span class="pre">Basic</span></code>, <code class="docutils literal notranslate"><span class="pre">sigopt_api_token</span></code> and <code class="docutils literal notranslate"><span class="pre">sigopt_project_id</span></code> is necessary for <code class="docutils literal notranslate"><span class="pre">SigOpt</span></code>.<code class="docutils literal notranslate"><span class="pre">sigopt_experiment_name</span></code> is optional, the default name is <code class="docutils literal notranslate"><span class="pre">nc-tune</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">tuning</span><span class="p">:</span>
+  <span class="nt">strategy</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sigopt</span>
+    <span class="nt">sigopt_api_token</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">YOUR-ACCOUNT-API-TOKEN</span>
+    <span class="nt">sigopt_project_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PROJECT-ID</span>
+    <span class="nt">sigopt_experiment_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nc-tune</span>
+  <span class="nt">accuracy_criterion</span><span class="p">:</span>
+    <span class="nt">relative</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">0.01</span>
+  <span class="nt">exit_policy</span><span class="p">:</span>
+    <span class="nt">timeout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0</span>
+  <span class="nt">random_seed</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">9527</span>
+</pre></div>
+</div>
+<p>For details, <a class="reference internal" href="sigopt_strategy.html"><span class="doc">how to use sigopt strategy in neural_compressor</span></a> is available.</p>
+</div>
+</div>
+</div>
+<div class="section" id="customize-a-new-tuning-strategy">
 <h2>Customize a New Tuning Strategy<a class="headerlink" href="#customize-a-new-tuning-strategy" title="Permalink to this headline">¶</a></h2>
-<p>Intel® Low Precision Optimization Tool supports new strategy extension by implementing a subclass of <code class="docutils literal notranslate"><span class="pre">TuneStrategy</span></code> class in lpot.strategy package
+<p>Intel® Neural Compressor supports new strategy extension by implementing a subclass of <code class="docutils literal notranslate"><span class="pre">TuneStrategy</span></code> class in neural_compressor.strategy package
 and registering this strategy by <code class="docutils literal notranslate"><span class="pre">strategy_registry</span></code> decorator.</p>
 <p>for example, user can implement a <code class="docutils literal notranslate"><span class="pre">Abc</span></code> strategy like below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@strategy_registry</span>
@@ -508,56 +436,39 @@ and registering this strategy by <code class="docutils literal notranslate"><spa
 <p>The <code class="docutils literal notranslate"><span class="pre">next_tune_cfg</span></code> function is used to yield the next tune configuration according to some algorithm or strategy. <code class="docutils literal notranslate"><span class="pre">TuneStrategy</span></code> base class will traverse
 all the tuning space till a quantization configuration meets pre-defined accuracy criterion.</p>
 <p>If the traverse behavior of <code class="docutils literal notranslate"><span class="pre">TuneStrategy</span></code> base class does not meet new strategy requirement, it could re-implement <code class="docutils literal notranslate"><span class="pre">traverse</span></code> function with self own logic.
-An example like this is under <a class="reference external" href="https://github.com/intel/lpot/blob/4939eb6527920867c16ffa9f9342df6fdc81f93f/docs/../lpot/strategy/strategy.py">TPE Strategy</a>.</p>
-</section>
-</section>
+An example like this is under <a class="reference external" href="https://github.com/chensuyue/lpot/blob/452349b090ac4c7987ce25f19bf6ba44a1eb1862/docs/../neural_compressor/strategy/strategy.py">TPE Strategy</a>.</p>
+</div>
+</div>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../releases_info.html" class="btn btn-neutral float-right" title="Release" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="adaptor.html" class="btn btn-neutral float-left" title="Adaptor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="releases_info.html" class="btn btn-neutral float-right" title="Release" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Intel® Low Precision Optimization Tool.
-
-    </p>
+    <p>&#169; Copyright 2022, Intel® Neural Compressor.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

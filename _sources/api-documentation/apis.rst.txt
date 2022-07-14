@@ -1,20 +1,10 @@
 APIs
 ####
 
-.. automodule:: lpot.benchmark
-   :members:
+The following API information is available:
 
-.. autoclass:: lpot.benchmark.Benchmark
-   :members:
+.. toctree::
+   :maxdepth: 1
 
-.. automodule:: lpot.objective
-   :members:
-
-.. automodule:: lpot.pruning
-   :members:
-
-.. automodule:: lpot.quantization
-   :members:
-
-.. automodule:: lpot.version
-   :members:
+   api-reference
+   ../docs/api-introduction.md

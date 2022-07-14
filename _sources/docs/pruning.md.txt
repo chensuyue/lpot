@@ -1,96 +1,168 @@
 Pruning
-=======
+============
 
 ## Introduction
 
-Sparsity is a measure of how many percents of elements in a tensor are [exact zeros][^1]. A tensor is considered sparse if most of its elements are zero. Only non-zero elements will be stored and computed so the inference process could be accelerated due to TOPS (teraoperations/second) and memory saved (acceleration needs sparse compute kernels which are a work in process).
+Network pruning is one of popular approaches of network compression, which removes the least important parameters in the network to achieve compact architectures with minimal accuracy drop.
 
-The <a href="https://en.wikipedia.org/wiki/Lp_space#When_p_=_0"><img src="http://latex.codecogs.com/svg.latex?\l_{1}&space;" title="http://latex.codecogs.com/svg.latex?\l_{1} " />-"norm" function</a> measures how many zero-elements are in a tensor <em>x</em>:
-<img src="http://latex.codecogs.com/svg.latex?\left|\left|&space;x\right|&space;\right|_{0}\doteq&space;\left|x_{1}&space;\right|^{0}&plus;&space;\left|x_{2}&space;\right|^{0}&plus;...&plus;\left|x_{n}&space;\right|^{0}&space;" title="http://latex.codecogs.com/svg.latex?\left|\left| x\right| \right|_{0}\doteq \left|x_{1} \right|^{0}+ \left|x_{2} \right|^{0}+...+\left|x_{n} \right|^{0} " />
-In other words, an element contributes either a value of 1 or 0 to \(l_0\).  Anything but an exact zero contributes a value of 1 - which is good. Sometimes it helps to think about density, the number of non-zero elements (NNZ) and sparsity's complement:
-\[
-density = 1 - sparsity
-\]
-A common method for introducing sparsity in weights and activations is called **pruning**. Pruning is the application of a binary criteria to decide which weights to prune: weights which match the pruning criteria are assigned a value of zero. Pruned elements are "trimmed" from the model: we replace their values with zero and also make sure they don't take part in the back-propagation process.</p>
+## Pruning Types
 
+- Unstructured Pruning
 
-## Design
+Unstructured pruning means finding and removing the less salient connection in the model where the nonzero patterns are irregular and could be anywhere in the matrix.
 
-The pruning process is similar to quantization-aware training (QAT). Intel® Low Precision Optimization Tool will do related model transformation during training and retrain the model to meet the accuracy goal.
+- Structured Pruning
 
-We implemented two kinds of object: Pruner and PrunePolicy. First, we define a sparsity goal (model-wise or op-wise, depending on whether there are ops not suitable for pruning) and the way to reach the sparsity goal (usually we increase the sparsity target linearly as the epoches). The pruner is in singleton mode, and will update the sparsity goal and schedule all PrunePolicy during different phases of training.
+Structured pruning means finding parameters in groups, deleting entire blocks, filters, or channels according to some pruning criterions.
 
-PrunePolicy carries different pruning algos. For example, MagnitudePrunePolicy sets thresholds of absolute value so that elements whose absolute value lower than the threshold will be zeroed. The zeroing process happens at the beginning and end of each minibatch iteration.
+## Pruning Algorithms
 
-## Usage
+<table>
+<thead>
+  <tr>
+    <th>Pruning Type</th>
+    <th>Pruning Granularity</th>
+    <th>Pruning Algorithm</th>
+    <th>Framework</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="2">Unstructured Pruning</td>
+    <td rowspan="2">Element-wise</td>
+    <td>Magnitude</td>
+    <td>PyTorch, TensorFlow</td>
+  </tr>
+  <tr>
+    <td>Pattern Lock</td>
+    <td>PyTorch</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Structured Pruning</td>
+    <td>Filter/Channel-wise</td>
+    <td>Gradient Sensitivity</td>
+    <td>PyTorch</td>
+  </tr>
+  <tr>
+    <td>Block-wise</td>
+    <td>Group Lasso</td>
+    <td>PyTorch</td>
+  </tr>
+  <tr>
+    <td>Element-wise</td>
+    <td>Pattern Lock</td>
+    <td>PyTorch</td>
+  </tr>
+</tbody>
+</table>
 
-Pruning configs need to be added into yaml as a ```pruning``` field. 
+- Magnitude
 
+  - The algorithm prunes the weight by the lowest absolute value at each layer with given sparsity target.
 
-```yaml
-pruning:                                             # mandotory only for pruning.
-  train:
-    start_epoch: 0
-    end_epoch: 10
-    iteration: 100
-    frequency: 2
-    
-    dataloader:
-      batch_size: 256
-      dataset:
-        ImageFolder:
-          root: /path/to/imagenet/train
-      transform:
-        RandomResizedCrop:
-          size: 224
-        RandomHorizontalFlip:
-        ToTensor:
-        Normalize:
-          mean: [0.485, 0.456, 0.406]
-          std: [0.229, 0.224, 0.225] 
-    criterion:
-      CrossEntropyLoss:
-        reduction: None
-    optimizer:
-      SGD:
-        learning_rate: 0.1
-        momentum: 0.9
-        weight_decay: 0.0004
-        nesterov: False
+- Gradient sensitivity
 
-  approach:
-    weight_compression:
-      initial_sparsity: 0.0
-      target_sparsity: 0.3
-      pruners:
-        - !Pruner
-            initial_sparsity: 0.0
-            target_sparsity: 0.97
-            prune_type: basic_magnitude              # currently only support basic_magnitude
-            names: ['layer1.0.conv1.weight']         # tensor name to be pruned.
-            start_epoch: 0
-            end_epoch: 2
-            update_frequency: 0.1
+  - The algorithm prunes the head, intermediate layers, and hidden states in NLP model according to importance score calculated by following the paper [FastFormers](https://arxiv.org/abs/2010.13382). 
+
+- Group Lasso
+
+  - The algorithm uses Group lasso regularization to prune entire rows, columns or blocks of parameters that result in a smaller dense network.
+
+- Pattern Lock
+
+  - The algorithm locks the sparsity pattern in fine tune phase by freezing those zero values of weight tensor during weight update of training. 
+
+## Pruning API
+
+### User facing API
+
+Neural Compressor pruning API is defined under `neural_compressor.experimental.Pruning`, which takes a user defined yaml file as input. The user defined yaml defines training, pruning and evaluation behaviors.
+[API Readme](../docs/pruning_api.md).
+
+### Usage 1: Launch pruning with user-defined yaml
+
+#### Launcher code
+
+Below is the launcher code if training behavior is defined in user-defined yaml.
+
+```
+from neural_compressor.experimental import Pruning
+prune = Pruning('/path/to/user/pruning/yaml')
+prune.model = model
+model = prune.fit()
 ```
 
-### Training
-Most of pruning methods need ``training`` to keep the accuracy. There are two ways that Users can define the training process in ``lpot``. One is completely configured in the yaml and ``lpot`` will create a training function automatically as the above example yaml. 
+#### User-defined yaml
 
-Or users can pass in ``def train`` by themselves and insert ``pruner`` manually like the previous version. This is more suitable for complex and customize training function like NLP tasks especially text-generation models. 
+The user-defined yaml follows below syntax, note `train` section is optional if user implements `pruning_func` and sets to `pruning_func` attribute of pruning instance.
+User could refer to [the yaml template file](../docs/pruning.yaml) to know field meanings.
 
-We provide examples of both 2 usages. For completely Yaml config, please refer to [resnet example](examples/pytorch/eager/image_recognition/imagenet/cpu/prune/conf.yaml). For users' training function, please refer to [BERT example](examples/pytorch/eager/language_translation/prune/conf.yaml).
+##### `train`
 
-### Pruning config
-We dived the pruning into 2 kinds: ``weight compression`` and ``activation compression``, the laster is WIP. ``weight compression`` means zeroing the weight matrixs.
+The `train` section defines the training behavior, including what training hyper-parameter would be used and which dataloader is used during training. 
 
-For ``weight_compression``, we dived params into global parameters and local paramers in different ``pruners``. Global prameters may contain **start_epoch** (on which epoch pruning begins), **end_epoch** (on which epoch pruning ends), **initial_sparsity** (initial sparsity goal default 0), **target_sparsity** (target sparsity goal) and **frequency** (of updating sparsity). At least one pruner instance needs to be defined under specific algos (currently only ``basic_magnitude`` supported). You can override all global params in a specific pruner using field names and specify names of which weight of model to be pruned. If no weight is specified, all weights of the model will be pruned.
+##### `approach`
 
-## Example of user pass-in training function
+The `approach` section defines which pruning algorithm is used and how to apply it during training process.
 
-Users pass a modified training function to Intel® Low Precision Optimization Tool. The following is part of example from BERT training:
+- ``weight compression``: pruning target, currently only ``weight compression`` is supported. ``weight compression`` means zeroing the weight matrix. The parameters for `weight compression` is divided into global parameters and local parameters in different ``pruners``. Global parameters may contain `start_epoch`, `end_epoch`, `initial_sparsity`, `target_sparsity` and `frequency`. 
+
+  - `start_epoch`:  on which epoch pruning begins
+  - `end_epoch`: on which epoch pruning ends
+  - `initial_sparsity`: initial sparsity goal, default 0.
+  - `target_sparsity`: target sparsity goal
+  - `frequency`: frequency to updating sparsity
+
+- `Pruner`:
+
+  - `prune_type`: pruning algorithm, currently ``basic_magnitude``, ``gradient_sensitivity`` and ``group_lasso``are supported.
+
+  - `names`: weight name to be pruned. If no weight is specified, all weights of the model will be pruned.
+
+  - `parameters`: Additional parameters is required ``gradient_sensitivity`` prune_type, which is defined in ``parameters`` field. Those parameters determined how a weight is pruned, including the pruning target and the calculation of weight's importance. It contains:
+
+    - `target`: the pruning target for weight, will override global config `target_sparsity` if set.
+    - `stride`: each stride of the pruned weight.
+    - `transpose`: whether to transpose weight before prune.
+    - `normalize`: whether to normalize the calculated importance.
+    - `index`: the index of calculated importance.
+    - `importance_inputs`: inputs of the importance calculation for weight.
+    - `importance_metric`: the metric used in importance calculation, currently ``abs_gradient`` and ``weighted_gradient`` are supported.
+
+    Take above as an example, if we assume the 'bert.encoder.layer.0.attention.output.dense.weight' is the shape of [N, 12\*64]. The target 8 and stride 64 is used to control the pruned weight shape to be [N, 8\*64]. `Transpose` set to True indicates the weight is pruned at dim 1 and should be transposed to [12\*64, N] before pruning. `importance_input` and `importance_metric` specify the actual input and metric to calculate importance matrix.
+
+### Usage 2: Launch pruning with user-defined pruning function
+
+#### Launcher code
+
+In this case, the launcher code is like the following:
 
 ```python
-...
+from neural_compressor.experimental import Pruning, common
+prune = Pruning(args.config)
+prune.model = model
+prune.pruning_func = pruning_func
+model = prune.fit()
+```
+
+#### User-defined pruning function
+
+User can pass the customized training/evaluation functions to `Pruning` for flexible scenarios. In this case, pruning process can be done by pre-defined hooks in Neural Compressor. User needs to put those hooks inside the training function.
+
+Neural Compressor defines several hooks for user use:
+
+```
+on_epoch_begin(epoch) : Hook executed at each epoch beginning
+on_batch_begin(batch) : Hook executed at each batch beginning
+on_batch_end() : Hook executed at each batch end
+on_epoch_end() : Hook executed at each epoch end
+on_post_grad() : Hook executed after gradients calculated and before backward
+```
+
+Following section shows how to use hooks in user pass-in training function which is part of example from BERT training:
+
+```python
+def pruning_func(model):
     for epoch in range(int(args.num_train_epochs)):
         pbar = ProgressBar(n_total=len(train_dataloader), desc='Training')
         model.train()
@@ -122,17 +194,7 @@ Users pass a modified training function to Intel® Low Precision Optimization To
             prune.on_batch_end()
 ...
 ```
-Then users can use LPOT like the following:
 
-```python
-from lpot.experimental import Pruning, common
-prune = Pruning(args.config)
-prune.model = common.Model(model)
-prune.train_dataloader = train_dataloader
-prune.pruning_func = train_func
-prune.eval_dataloader = train_dataloader
-prune.eval_func = eval_func
-model = prune()
-```
+## Examples
 
-[^1]: https://nervanasystems.github.io/distiller/pruning.html 
+For related examples, please refer to [Pruning examples](../examples/README.md).
